@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { ChecklistsWrapper } from "./components/ChecklistsWrapper";
 import { Container } from "./components/Container";
 import { Dialog } from "./components/Dialog";
@@ -52,6 +53,12 @@ const completed = [
 ];
 
 function App() {
+  const [showDialog, setShowDialog] = useState(false);
+
+  const toggleDialog = () => {
+    setShowDialog(!showDialog);
+    console.log("clicou no botão")
+  };
   return (
     <main>
       <Container>
@@ -74,12 +81,13 @@ function App() {
             })}
           </ToDoList>
           <Footer>
-            <FabButton>
+            <Dialog  isOpen={showDialog} onClose={toggleDialog} />
+            <FabButton onClick= {toggleDialog} >
               <IconPlus />
             </FabButton>
           </Footer>
         </ChecklistsWrapper>
-        <Dialog />
+        
       </Container>
     </main>
   );
